@@ -39,6 +39,7 @@ namespace WinFormsApp3
             else if (baseString.Length > 0)
             {
                 key = baseString.Remove(GRILLE_STRING_LENGTH, baseString.Length - GRILLE_STRING_LENGTH);
+                MessageBox.Show("Слишком длинный текст. Строка будет урезана до 16 символов");
             }
 
                 return key;
@@ -73,7 +74,7 @@ namespace WinFormsApp3
                 {
                     i++;
                 }
-                ;
+                
             }
             return str;
         }
@@ -181,6 +182,8 @@ namespace WinFormsApp3
         public static string EncipherVigenere(string basePlainText, string baseKey)
         {
             string plainText = makeDataAcceptable(basePlainText);
+            basePlainText = basePlainText.ToLower().Trim();
+            basePlainText = MakeAcceptableString(basePlainText, ALPHABET_STRING);
             baseKey = makeDataAcceptable(baseKey);
             string cipherText = string.Empty;
             string key = KeyConverter(baseKey, plainText);
@@ -233,25 +236,30 @@ namespace WinFormsApp3
             string plaintext = string.Empty;
             ciphertext = ciphertext.Trim().ToLower().Replace(" ", "");
             ciphertext = MakeAcceptableString(ciphertext, ALPHABET_STRING_ENG);
-       
-            char[,] grille = new char[GRILLE_SIZE, GRILLE_SIZE];
 
-            for (int i = 0; i < GRILLE_SIZE; i++)
+            if (ciphertext.Length == GRILLE_STRING_LENGTH)
             {
-                for (int j = 0; j < GRILLE_SIZE; j++)
+                char[,] grille = new char[GRILLE_SIZE, GRILLE_SIZE];
+
+                for (int i = 0; i < GRILLE_SIZE; i++)
                 {
-                    grille[i, j] = ciphertext[i * GRILLE_SIZE + j];
+                    for (int j = 0; j < GRILLE_SIZE; j++)
+                    {
+                        grille[i, j] = ciphertext[i * GRILLE_SIZE + j];
+                    }
                 }
-            }
 
-            for (int i = 1; i <= 4; i++)
+                for (int i = 1; i <= GRILLE_SIZE; i++)
+                {
+                    key = TurnGrilleCounterClockWise(key);
+                    plaintext = string.Concat(FillOutCharGrille(key, grille), plaintext);
+                }
+            } else
             {
-                key = TurnGrilleCounterClockWise(key);
-                plaintext = string.Concat(FillOutCharGrille(key, grille), plaintext);
+                MessageBox.Show("Неверный шифротекст");
             }
 
-           
-            return plaintext;
+                return plaintext;
 
 
         }

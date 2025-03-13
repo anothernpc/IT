@@ -92,8 +92,17 @@ namespace WinFormsApp3
         {
             if (chosenMethod == 0)
             {
-
-                tbCiphertext.Text = Program.EncipherVigenere(tbPlaintext.Text, tbVigenereKey.Text);
+                if (tbVigenereKey.Text.Length < 1)
+                {
+                    MessageBox.Show("Неверный ключ");
+                } else if (tbPlaintext.Text.Length == 0)
+                {
+                    MessageBox.Show("Пустой исходный текст");
+                } else
+                {
+                    tbCiphertext.Text = Program.EncipherVigenere(tbPlaintext.Text, tbVigenereKey.Text);
+                }
+                    
             }
             else
             {
@@ -142,8 +151,17 @@ namespace WinFormsApp3
         {
             if (chosenMethod == 0)
             {
-                //function to encrypt
-                tbPlaintext.Text = Program.DecipherVigenere(tbCiphertext.Text, tbVigenereKey.Text);
+                if(tbVigenereKey.Text.Length < 1)
+                {
+                    MessageBox.Show("Неверный ключ");
+                } else if (tbCiphertext.Text.Length == 0)
+                {
+                    MessageBox.Show("Пустой шифротекст");
+                }
+                else
+                {
+                    tbPlaintext.Text = Program.DecipherVigenere(tbCiphertext.Text, tbVigenereKey.Text);
+                }
             }
             else
             {
