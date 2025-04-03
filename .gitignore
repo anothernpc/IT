@@ -20,6 +20,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+.vs/
 
 # Артефакты сборки Visual Studio
 *.obj
