@@ -21,6 +21,33 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# Артефакты сборки Visual Studio
+*.obj
+*.exe
+*.dll
+*.pdb
+*.idb
+*.ilk
+*.log
+*.tlog
+*.lastbuildstate
+*.suo
+*.user
+*.ipch
+*.pch
+*.cache
+*.ilk
+*.manifest
+*.vspscc
+*.vssscc
+*.tmp
+*.csproj.user
+*.vbproj.user
+*.dbmdl
+*.opendb
+*.VC.db
+*.VC.opendb
+
 # .NET Core
 project.lock.json
 project.fragment.lock.json
